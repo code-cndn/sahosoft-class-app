@@ -1,0 +1,11 @@
+a{
+    cursor: pointer;
+}
+.ms-collapse-nav li.card ul {
+    box-shadow: none !important; 
+     background:none !important; 
+  
+}
+.ms-collapse-nav li a:after{
+    content: ''!important;
+}

@@ -1,0 +1,64 @@
+<form [formGroup]="addForm" (ngSubmit)="Submit()">
+<h1 mat-dialog-title class="fs-1">Ask Question</h1>
+<div mat-dialog-content>
+    <div class="row">
+        <div class="col-12 dailog-body">
+            <mat-tab-group (selectedTabChange)="tabChanged($event)">
+                <mat-tab label="Related to course">
+                   @if (tabIndex == 0) {
+                    <mat-form-field class="d-block">
+                        <mat-label>Title</mat-label>
+                        <input matInput formControlName="queryTitle" required>
+                        @if((submitted || ctrl['queryTitle'].touched || isGo) && ctrl['queryTitle'].invalid){
+                            <mat-error> {{formErrors.queryTitle}}</mat-error>
+                        }
+                        
+                    </mat-form-field>
+
+                    <mat-form-field class="d-block">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput formControlName="queryDetails" required></textarea>
+                        @if((submitted || ctrl['queryDetails'].touched || isGo) && ctrl['queryDetails'].invalid){
+                            <mat-error> {{formErrors.queryDetails}}</mat-error>
+                        }
+                    </mat-form-field>
+                }
+                </mat-tab>
+                <mat-tab label="Other Doubt">
+                    @if (tabIndex == 1) {
+                    <mat-form-field class="d-block">
+                        <mat-label>Issue</mat-label>
+                        <input matInput formControlName="issue" >
+                    </mat-form-field>
+                    <mat-form-field class="d-block">
+                        <mat-label>Title</mat-label>
+                        <input matInput formControlName="queryTitle" required>
+                        @if((submitted || ctrl['queryTitle'].touched || isGo) && ctrl['queryTitle'].invalid){
+                            <mat-error> {{formErrors.queryTitle}}</mat-error>
+                        }
+                        
+                    </mat-form-field>
+
+                    <mat-form-field class="d-block">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput formControlName="queryDetails" required></textarea>
+                        @if((submitted || ctrl['queryDetails'].touched || isGo) && ctrl['queryDetails'].invalid){
+                            <mat-error> {{formErrors.queryDetails}}</mat-error>
+                        }
+                    </mat-form-field>
+                }
+                </mat-tab>
+            </mat-tab-group>
+
+
+
+        </div>
+    </div>
+
+</div>
+
+<div mat-dialog-actions>
+    <button type="button" class="btn btn-raised btn-danger" mat-button (click)="onNoClick()">Cancel</button>
+    <button type="submit"  class="btn btn-raised btn-primary" mat-button  cdkFocusInitial>Save</button>
+</div>
+</form>

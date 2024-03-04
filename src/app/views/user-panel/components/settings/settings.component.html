@@ -1,0 +1,78 @@
+<div class="d-flex">
+    <h2 class="section-title no-margin-top mb-3 ">Settings</h2>
+    <!-- <button class="btn btn-primary btn-raised ms-5" (click)="goBack()">Back</button> -->
+</div>
+
+<section class="ms-component-section align-items-start d-block">
+    <div class="row">
+        <div class="col-12">
+            @if (objCourses?.length > 0) {
+                <mat-tab-group mat-stretch-tabs="false">
+                    <mat-tab label="System Configuration">
+                      
+                        <div class="m-5">
+                            <mat-accordion>
+                                @for (item of objCourses; track item.id) {
+                                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="mb-3 bg-default">
+                                    <mat-expansion-panel-header >
+                                        <mat-panel-title class="fw-bold">
+                                            {{item.itemTitle}} {{'Batch : '+item.batchName}}
+                                           
+                                        </mat-panel-title>
+                                        <mat-panel-description class="justify-content-end">
+                                           <span class="fw-bold ">Configuration Date: <span class="ms-2">{{item.configDate | date}}</span></span> 
+                                        </mat-panel-description>
+                                    </mat-expansion-panel-header>
+                                    <div class="card" style="box-shadow: none;">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <p class="fw-bold text-primary">System Configuration Image</p>
+                                                <a (click)="openImageViewModel(item)"><img [src]="imagePath+item.configData?.systemScreenshotPath" alt="" class="img-fluid"></a>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="card-body overflow-hidden ">
+                                                    <!-- <h4 class="color-success fw-bold">Registered Browser</h4>
+                                                    <span class="bg-primary rounded-3 px-3 p-2">{{item.configData?.browser}}</span> -->
+                                                    <div class="card text-white bg-success mb-3">
+                                                        <div class="card-body">
+                                                          <h5 class="card-title">Registred Device Id:</h5>
+                                                          <p class="card-text">{{item.configData?.deviceId}}</p>
+                                                          <h5 class="card-title">System Details:</h5>
+                                                          <p class="card-text">{{item.configData?.sysInfo}}</p>
+                                                        </div>
+                                                      </div>
+
+                                                   <small>
+
+                                                    <h4 class="color-primary fw-bold">Current Device Id: </h4>
+                                                    <span class="bg-primary rounded-3 px-3 p-2">{{currentDeviceId}}</span>
+                                                   </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </mat-expansion-panel>
+                            }
+                            </mat-accordion>
+                        </div>
+                    <!-- } -->
+    
+                    </mat-tab>
+    
+                </mat-tab-group>
+            }@else {
+                <div class="card animated fadeInUp animation-delay-7 color-primary withripple">
+                    <div class="card-body-big color-dark">
+                        <div class="text-center">
+                            <h1 class="color-primary">Sorry!</h1>
+                            <h2>No such system sonfiguration found for the course.</h2>
+                            <p class="lead lead-sm">Please configure the courses to continue watching your course videos.</p>
+                            <a routerLink = "/user/my-courses" class="btn btn-primary btn-raised"> Go to My Courses</a>
+                        </div>
+                    </div>
+                <div class="ripple-container"></div></div>
+            }
+           
+        </div>
+    </div>
+</section>

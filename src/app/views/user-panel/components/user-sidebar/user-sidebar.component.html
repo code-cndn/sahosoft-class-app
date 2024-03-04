@@ -1,0 +1,28 @@
+<h3 class="ms-paper-menu-title"><i class="zmdi zmdi-apps"></i>Menu<a role="button"
+    data-bs-toggle="collapse" href="#collapseMenu" aria-expanded="false"
+    aria-controls="collapseMenu" class="withripple"><i class="zmdi zmdi-menu"></i></a></h3>
+<div class="panel-menu collapse" id="collapseMenu" >
+<ul class="panel-group ms-collapse-nav" id="components-nav" role="tablist"
+    aria-multiselectable="true">
+    <li class="card" role="tab" id="e1">
+        <ul id="c1" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="e1"
+            data-bs-parent="#components-nav">
+            <li><a class="withripple " routerLink="dashboard" routerLinkActive="active"><i
+                        class="fa fa-dashboard"></i> Dashboard</a></li>
+          
+            <li><a class="withripple" routerLink="my-courses" routerLinkActive="active"><i
+                        class="fa fa-book"></i> My Course</a></li>
+            <!-- <li><a class="withripple" href="component-blockquotes.html"><i
+                        class="fa fa-quote-right"></i> Blockquotes</a></li>
+            <li><a class="withripple" href="component-forms.html"><i
+                        class="fa fa-check-square-o"></i> Forms</a></li> -->
+            <li><a class="withripple" routerLink="settings"><i class="fa fa-sliders"></i>
+                    Settings</a></li>
+            <li><a class="withripple text-danger" (click)="logout()"><i class="fa fa-blind"></i>
+                    Logout</a></li>
+        </ul>
+    </li>
+
+
+</ul> <!-- ms-collapse-nav -->
+</div>

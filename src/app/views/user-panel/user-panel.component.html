@@ -1,0 +1,31 @@
+<div class="material-background"></div>
+
+<div class="container container-full pt-4">
+    <div class="ms-paper">
+        <div class="row">
+            <div class="col-lg-3 ms-paper-menu-left-container">
+                <div class="ms-paper-menu-left">
+                    <app-user-sidebar />
+                </div>
+
+            </div>
+
+            <!-- col-lg-3 -->
+            <!-- User Panel main body -->
+            <!-- <ng-container>
+                <router-outlet></router-outlet>
+            </ng-container> -->
+
+            <!-- col-lg-9 -->
+            <div class="col-lg-9 ms-paper-content-container" style="min-height: 90vh;">
+                <div class="ms-paper-content">
+                    <!-- <router-outlet></router-outlet> -->
+
+                    <section class="ms-component-section d-block" >
+                        <router-outlet></router-outlet>
+                    </section>
+                </div>
+            </div>
+        </div> <!-- row -->
+    </div> <!-- ms-paper -->
+</div> <!-- container -->

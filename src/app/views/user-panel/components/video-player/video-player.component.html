@@ -1,0 +1,23 @@
+
+    <div class="vidcontainer">
+      <div class="video_player">
+          <video preload="metadata" id="customVideoPlayer" class="main-video" >
+            <!-- <source [src]="'https://videostraem2.onrender.com/stream/'+vidData?.token+'/'+vidData?.videoId"  type="video/mp4"> -->
+            <!-- <source [src]="'https://video-stream-server-38jb.onrender.com/stream/'+vidData?.token+'/'+vidData?.videoId"  type="video/mp4"> -->
+            <!-- <source   [id]="video?.token+'/'+video?.videoId" type="video/mp4"> -->
+            <source id="source" type="video/mp4">
+            <!-- <source id="source" type="video/mp4">
+            <source id="source" type="video/mp4"> -->
+    
+            <!-- <source src="assets/videos/mikethefrog.mp4"  type="video/mp4"> -->
+    
+            <!-- <source src="assets/videos/mikethefrog.ogv" size="720" type="video/mp4">
+                <source src="assets/videos/mikethefrog.webm" size="1080" type="video/mp4"> -->
+            <track label="English" kind="subtitles" src="./How To Get Started With VSCode.vtt" srclang="en">
+            <track label="Urdu" kind="subtitles" src="./test.vtt" srclang="en">
+          </video>
+          <button  id="play-button" class="play-btn animate__animated "><i class="fa fa-play m-0 p-0"></i></button>
+        </div>
+    
+    </div>
+

@@ -1,0 +1,115 @@
+@if(isOpenSysCongfig){
+<div class="d-flex">
+    <h2 class="section-title no-margin-top mb-3 ">Set Up Configuration </h2>
+    <button class="btn btn-primary btn-raised ms-5" (click)="goBack()">Back</button>
+</div>
+
+<section class="ms-component-section align-items-start">
+    <div class="row">
+        <div class="col-12">
+            <app-user-system-config [data]="data" />
+        </div>
+    </div>
+</section>
+
+}
+
+@if(!isOpenSysCongfig){
+<h2 class="section-title no-margin-top  ">My Purchased Courses</h2>
+@defer (when objCourses.length) {
+<section class="ms-component-section align-items-start" style="width: 100%;">
+
+
+    <div class="row">
+        @for (c of objCourses; track c.courseId) {
+        <div class="col-xs-12">
+            <a (click)="navigateToVideo(c)">
+                <div class="card card-primary">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card-header">
+                                <h3 class="card-title">{{c.itemTitle}}</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-lg-push-6">
+                            <div class="withripple zoom-img">
+                                <a href="javascript:void(0);">
+                                    <!-- <img [src]="coursePath + data.bannerPath"> -->
+                                    <img [src]="coursePath+c.bannerPath" alt="" class="img-fluid">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-lg-pull-6">
+                            <div class="card-body overflow-hidden text-center">
+                                <p><span class="px-2 py-1 bg-danger text-white">{{c.classStatus}}</span></p>
+                                <p>{{c.courseSubTypeName}}</p>
+                                <p><span class="fw-bold"><span class="text-muted">Enrollment Date :</span>
+                                        {{c.enrollDate | date}}</span></p>
+                                <p><span class="fw-bold"><span class="text-muted">Order Id:</span> {{c.orderId}}</span>
+                                </p>
+                                <p><span class="fw-bold"><span class="text-muted">Assigned Batch:</span>
+                                        {{c.batchName}}</span> </p>
+
+                                <a href="javascript:void(0)" class="btn btn-primary btn-raised">
+                                    <i class="zmdi zmdi-play zmdi-hc-fw fw-bold fs-3"></i>
+                                    Play</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        }
+
+
+        <!-- @for (c of objCourses; track c.courseId) {
+        <div class="col-md-6">
+            <a (click)="navigateToVideo(c)">
+                <div class="card">
+                    <div class="withripple zoom-img">
+                        <a>
+                           
+                            <img src="assets/img/demo/m1.jpg" alt="" class="img-fluid">
+                        </a>
+                        <div class="ripple-container"></div>
+                    </div>
+                    <div class="card-body overflow-hidden">
+                        <p class="fw-bold">{{c.itemTitle}}</p>
+                        <p><span class="px-2 py-1 bg-danger text-white">{{c.classStatus}}</span></p>
+                        <p>{{c.courseSubTypeName}}</p>
+                        <p><span class="fw-bold"><span class="text-muted">Enrollment Date :</span>
+                                {{c.enrollDate}}</span></p>
+                        <p><span class="fw-bold"><span class="text-muted">Order Id:</span> {{c.orderId}}</span></p>
+                        <p><span class="fw-bold"><span class="text-muted">Assigned Batch:</span>
+                                {{c.batchName}}</span>
+                        <p><i class="mr-1 zmdi zmdi-play zmdi-hc-fw text-primary fw-bold fs-3"></i><span
+                                class="text-danger fw-bold">Play</span></p>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+        } -->
+
+
+    </div>
+
+
+
+</section>
+}@placeholder {
+<div class="row" style="height: 300px;">
+    <div class="col-12 align-self-center">
+        <div class="">
+            <app-loader />
+            <p class="text-center mt-5">Loading Data..</p>
+        </div>
+
+
+    </div>
+</div>
+
+}
+
+}

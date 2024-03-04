@@ -1,0 +1,506 @@
+<!-- <div class="material-backgrounds" style="background-image: url('../../../assets/img/video_background2.png');"></div> -->
+<div class="body " style="background-image: url('../../../assets/img/video_background2.png');">
+  <div class="container-fluid align-items-stretch ">
+    <!-- Page Content  -->
+    <div class="row justify-content-center pt-lg-5 pt-3">
+      <div class="col-lg-11 col-12">
+        <div class="row">
+          <div class="col-lg-8 col-12">
+            <div class="row ">
+              <div class="col-12">
+                <div class="row ">
+                  <div class="col-12 mb-3 app_card" style="display:none">
+                    <div class="card py-lg-4 " style="width:100%; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                      <div class="card-body  ps-3 pt-1 pb-0">
+                        <div class="mb-3">
+                          <h5>{{courseName}}</h5>
+                        </div>
+                        <!-- <div class="mb-3">
+                          <span class="bg-success text-white p-2 rounded-2">Open Course
+                            Started</span>
+                        </div> -->
+                        <div class="d-flex justify-content-between">
+                          <div class="align-self-center">
+                           <p style="font-size: 1.5rem;">{{totalLactures}} Lectures</p>
+                          </div>
+                           <button class="btn btn-raised btn-primary" (click)="goBack()">Back to course</button>
+                         </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Playlist Mobile App View -->
+                  <div class="col-12 app_playlist" style="display: none;">
+                    <button class="btn btn-lg btn-raised btn-primary mb-2 me-2 w-100 fw-bold" type="button" data-bs-toggle="offcanvas"
+                      data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                      My PlayList
+                      <span class="mx-2 fw-bold"><i class="fa fa-list" aria-hidden="true"></i></span>
+                    </button>
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+                      aria-labelledby="offcanvasRightLabel">
+                      <div class="offcanvas-header">
+                        <h5 id="offcanvasRightLabel">Playlist contents</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                          aria-label="Close"></button>
+                      </div>
+                      <div class="offcanvas-body">
+                        <div class="offcanvas-body">
+                          <nav id="sidebar pc_sidebar">
+                            <div class="">
+
+                              <ul class="panel-group ms-collapse-nav list-unstyled components mb-5" id="components-nav"
+                                role="tablist" aria-multiselectable="true">
+                                @for (list of objVideoList; track $index) {
+                                <li class="card mb-1" role="tab" [id]="'e1'+list.id">
+                                  <a (click)="getTopics(list.classTimeTableId)" role="button" data-bs-toggle="collapse"
+                                    [href]="'#c1'+list.id" aria-expanded="false" aria-controls="c1"
+                                    class="withripple collapsed ques" 
+                                    [matTooltip]="list.topicName">{{ $index + 1 }}. {{list.topicName | textTruncate: 40}}
+                                    <div>
+                                      @if (list.courseTypeId == 1) {
+                                        <p class="fw-bold text-muted mb-0"><small>Date: {{list.classDate | date}}</small></p>
+                                      }
+                                    </div>
+                                    <div class="ripple-container"></div>
+                                  </a>
+
+                                  <ul [id]="'c1'+list.id" class="panel-collapse collapse" role="tabpanel"
+                                    aria-labelledby="e1" data-bs-parent="#components-nav" >
+                                    @for (d of objTopics; ; track d.id; let x = $index) {
+                                    <li class="p-2 fs-5" [class.activeli]="videoIndex==x && chapterId==list.id"
+                                    (click)="playVid(list.topicName,d.urlName,list.id,x,d.id)">
+
+                                      <div class="row justify-content-center">
+                                        <div class="col-10"><i class="fa fa-play-circle text-primary "></i> {{ d.urlName }}
+                                        </div>
+                                        <div class="col-1">
+                                          @if(videoIndex==x && chapterId==list.id){
+                                          <i class="fa fa-pause text-success animate__animated animate__fadeIn animate__infinite	infinite "
+                                            aria-hidden="true"></i>
+                                          }@else if(!(videoIndex==x &&
+                                          chapterId==list.id)){
+                                          <i class="fa fa-play-circle text-danger" aria-hidden="true"></i>
+                                          }
+
+
+                                        </div>
+
+
+                                      </div>
+                                    </li>
+                                    }
+
+
+                                  </ul>
+                                </li>
+                                }
+                              </ul>
+                            </div>
+                          </nav>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!--                                         
+                                        <button class="btn btn-lg btn-dark mb-2 me-2 w-100 fw-bold" (click)="openEnd(content)">My PlayList
+                                            <span class="mx-2 fw-bold"><i class="fa fa-list"
+                                                    aria-hidden="true"></i></span></button> -->
+                  </div>
+                  <!-- Playlist Mobile App View End-->
+                  <div class="col-lg-11 col-12 p-0 mt-lg-0 " style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                    <!-- <video class="customVideoPlayer" [src]="vidParams?'http://localhost:3001/stream/' + vidParams?.token + '/' + vidParams?.videoId:''" controls></video> -->
+                      <app-video-player [vidData]="vidParams" />
+                  </div>
+                </div>
+                <div class="row mt-1">
+                  <div class="col-12" style="border-bottom: 2px solid #E2E2E2;">
+                    
+                    <h4 class="text-dark fw-bold">{{chapName}} | {{topicadetails}}</h4>
+                    <p>VIDEO {{videoIndex +1}} OF {{chapterVideoLen}}</p>
+                  </div>
+                
+                </div>
+
+
+
+
+
+
+
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Sidebar -->
+
+          <div class="col-lg-4 col-12">
+            <div class="card py-lg-4 large_card " style="width:100%; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+              <div class="card-body ">
+                <div class="">
+                  <h5 class="fs-3">{{courseName}}</h5>
+                </div>
+                <!-- <div class="mb-3">
+                  <span class="bg-success text-white p-2 rounded-2">Open Course Started</span>
+                </div> -->
+                <div class="d-flex justify-content-between">
+                 <div class="align-self-center">
+                  <p style="font-size: 1.5rem;">{{totalLactures}} Lectures</p>
+                 </div>
+                  <button class="btn btn-raised btn-primary" (click)="goBack()">Back to course</button>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-12 parent d-md-block d-none">
+              <nav id="sidebar ">
+               
+                <div class="child">
+                  <div>
+                    <p class="fw-bold text-dark">Course Content</p>
+                  </div>
+                  <mat-accordion>
+                    @for (list of objVideoList; track $index) {
+                    <mat-expansion-panel class="py-3 mb-1">
+                      <mat-expansion-panel-header  (click)="getTopics(list.classTimeTableId)">
+                        <div>
+                          <p class="mb-0" 
+                          [matTooltip]="list.topicName"
+                          >{{list.topicName | textTruncate: 40}}</p>
+                          @if (list.courseTypeId == 1) {
+                            <p class="fw-bold text-muted"><small>Date: {{list.classDate | date}}</small></p>
+                          }
+                        </div>
+
+                      </mat-expansion-panel-header>
+                      @for (d of objTopics; track d.id; let x = $index) {
+                      <a class="fw-bold" [class.activeli]="videoIndex==x && chapterId==list.id"
+                        (click)="playVid(list.topicName,d.urlName,list.id,x,d.id)">
+
+                        <div class="row justify-content-center pb-3">
+                          <div class="col-10"><i class="fa fa-play-circle text-primary "></i> {{ d.urlName }}
+                          </div>
+                          <div class="col-1">
+                            @if(videoIndex==x && chapterId==list.id){
+                            <i class="fa fa-pause text-success animate__animated animate__fadeIn animate__infinite	infinite "
+                              aria-hidden="true"></i>
+                            }@else if(!(videoIndex==x &&
+                            chapterId==list.id)){
+                            <i class="fa fa-play-circle text-danger" aria-hidden="true"></i>
+                            }
+
+
+                          </div>
+
+
+                        </div>
+                      </a>
+                      }
+
+                    </mat-expansion-panel>
+                    }
+                  </mat-accordion>
+
+
+                </div>
+              </nav>
+
+            </div>
+            <!-- Filter dought -->
+            <div class="col-12">
+
+            </div>
+
+
+          </div>
+          <!-- Sidebar End-->
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center ">
+      <div class="col-lg-11 col-12">
+        <div class="row">
+          <div class="col-lg-8 col-12">
+            <div class="col-12">
+              <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" (selectedTabChange)="onTabChange($event)">
+                <mat-tab label="Reviews">
+                 
+                    <div class="col-12 mt-2">
+
+                      <mat-accordion class="example-headers-align ">
+                        <mat-expansion-panel hideToggle>
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                              <button type="button" class="btn btn-raised btn-warning">Rate this
+                                course</button>
+                            </mat-panel-title>
+
+                          </mat-expansion-panel-header>
+
+                          <div class="row">
+                            <div class="col-8">
+
+                              <form [formGroup]="reviewForm" (ngSubmit)="SubmitReview()">
+                                <div class="mb-1">
+                                  <p class="fw-bold">This rating uses customized values.</p>
+                                  <ngx-stars [maxStars]="5" [initialStars]="0" [readonly]="false" [color]="'#decf04'"
+                                    [size]="2" (ratingOutput)="onRatingSet($event)"
+                                   ></ngx-stars>
+                                </div>
+                                <mat-form-field style="display: block;">
+                                  <mat-label>Title*</mat-label>
+                                  <input formControlName="title" matInput>
+                                </mat-form-field>
+                                <mat-form-field style="display: block;">
+                                  <mat-label>Description*</mat-label>
+                                  <textarea formControlName="review" matInput></textarea>
+                                </mat-form-field>
+
+
+                                <button type="submit" class="btn btn-raised btn-warning">Save</button>
+                              </form>
+
+                            </div>
+                          </div>
+
+
+                        </mat-expansion-panel>
+
+                      </mat-accordion>
+                    </div>
+                
+                
+
+                      @if (objReviewData?.length > 0) {
+                        <div class="col-12">
+                          <div class="row">
+                            @for (rev of objReviewData; track rev.id) {
+                              <div class="col-lg-6 col-12 ">
+                                <div class="mb-2 mt-5">
+                                  <div class="d-flex">
+                                    <div class="bg-dark text-white rounded-circle d-flex justify-content-center"
+                                      style="width: 40px; height: 40px;">
+        
+                                      <span class="text-center align-self-center fw-bold">{{rev.student | uppercase |
+                                        shortName
+                                        }}</span>
+                                    </div>
+                                    <span class="fw-bold align-self-center mx-2">{{rev.student | titlecase}}</span>
+                                  </div>
+                                  <div class="mb-1 d-flex ">
+                                    <span class="fs-4 text-warning">
+                                      <ngx-stars [maxStars]="5" [initialStars]="rev.rating" [readonly]="true"
+                                        [color]="'#decf04'" [size]="1"></ngx-stars>
+                                    </span>
+                                    <span class="fw-bold mx-3 text-muted"><small>{{rev.createdOn |
+                                        dateAsAgo}}</small></span>
+        
+        
+                                  </div>
+                                  <div class="">
+                                    <div>
+                                      <span class="fw-bold">{{rev.title}}</span>
+                                    </div>
+                                    <div class="">
+                                      <span class="text-justify">
+                                        {{rev.review}}</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              }
+                          </div>
+                        </div>
+                       
+                      }
+                </mat-tab>
+             
+                <mat-tab label="Notes">
+                  <div class="row mt-5">
+                    <div class="col-6">
+                      @if (objVideoList?.length > 0) {
+                        <div class="d-flex justify-content-between">
+                          <p class="align-self-center">{{chapName}}</p>
+                          <button class="btn btn-raised btn-default" (click)="downloadNotes()"><i class="fa fa-download text-primary"></i> Download</button>
+                        </div>
+                    }@else{
+                      <p>
+                        N/A
+                      </p>
+                    }
+                    </div>
+                  </div>
+             
+            
+                </mat-tab>
+                <mat-tab label="Ask Doubt" >
+                  <div class="col-12 p-5">
+                    <div class="row">
+                      <div class="col-6 align-self-center">
+                        All Questions
+                      </div>
+                      <div class="col-6">
+                        <form class="example-form" (ngSubmit)="search(str.value)">
+                          <mat-form-field class="example-full-width" style="display: block;">
+                            <mat-label>Search</mat-label>
+                            <input #str  type="text" matInput placeholder="">
+                            <mat-icon type="submit" matSuffix >search</mat-icon>
+                          </mat-form-field>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        @for (item of filterAllDoubtQuestion; track $index) {
+                        <div class="card card-primary ">
+                          <div class="card-header bg-light text-dark">
+                            <h3 class="card-title">{{item.queryTitle}} </h3>
+                          </div>
+                          <div class="card-body pt-0">
+                            <form [formGroup]="commentForm">
+                            <div class="d-flex justify-content-between">
+                              <div>
+                                <p> {{item.queryDetails}} </p>
+
+                                <p><span class="bg-raised bg-primary px-4">
+                                    {{item.topicName}}
+                                  </span></p>
+                                <p class="text-muted fw-bold">Ask By <i class="text-primary"> {{item.userName}}</i><small class="mx-3 rounded-2 px-3" style="background-color: #d6d6d4;"> {{item.createdOn | dateAsAgo}} </small></p>
+                              </div>
+                              <div class="align-self-end">
+                                <div class="d-flex justify-content-between">
+                                  <a (click)="GetQueryCommentByQueryId(item.id); isexpandPanel = !isexpandPanel" class="btn-circle btn-circle-primary mr-2"><i class="icon ion-ios-chatbubbles fs-2"></i> @if(item.totalComment > 0){<span  class="badge-pill badge-pill-pink">{{item.totalComment}}</span>}</a>
+                                  <a (click)="likeQuery(item.id)" [ngClass]="{'bg-primary text-white':item.isLike }" class="btn-circle btn-circle-primary "><i class=" fa fa-thumbs-up fs-2"></i> @if(item.likes > 0){<span class="badge-pill badge-pill-pink">{{item.likes}}</span>}</a>
+                                </div>
+                              </div>
+                           
+
+                            </div>
+                           
+                            <mat-accordion>
+                              <mat-expansion-panel class=" p-0"  [expanded]="isexpandPanel" style="box-shadow: none; ">
+                            <div class="row ">
+                              @if(objSelectedQuerie?.length > 0){
+                              <div class="col-12 child2 pe-4 mt-2" >
+                                @for (q of objSelectedQuerie; track $index) {
+                                <div class="mb-2 mt-5">
+                                  <div class="d-flex">
+                                    <div class="bg-dark text-white rounded-circle d-flex justify-content-center"
+                                      style="width: 40px; height: 40px;">
+        
+                                      <span class="text-center align-self-center fw-bold">{{q.userName | uppercase |
+                                        shortName
+                                        }}</span>
+                                    </div>
+                                    <span class="fw-bold align-self-center mx-2">{{q.userName | titlecase}}</span>
+                                  </div>
+                         
+                                  <div class="mt-2">
+                                    <!-- <div>
+                                      <span class="fw-bold">{{'rev.title'}}</span>
+                                    </div> -->
+                                    <div class="">
+                                      <span class="text-justify">
+                                        {{q.comment}}</span>
+
+                                        <div class="d-flex justify-content-between">
+                                          <p class="fw-bold  text-muted"><small>{{q.createdOn |
+                                            dateAsAgo}}</small></p>
+                                            <a (click)="likeComment(q.id,item.id)" [ngClass]="{'bg-primary text-white':q.isLike }" class="btn-circle btn-circle-primary "><i class=" fa fa-thumbs-up fs-2"></i> @if(q.likes > 0){<span class="badge-pill badge-pill-pink">{{item.likes}}</span>}</a>
+                                        </div>
+                                        
+                                    </div>
+                                  </div>
+
+                            
+                                
+                                </div>
+                                <hr class="color">
+                              }
+                             
+                              </div>
+                            }
+                              <div>
+                              
+                                <mat-form-field style="display: block;">
+                                  <mat-label>Type here to comment</mat-label>
+                                  <textarea matInput formControlName="comments"></textarea>
+                                </mat-form-field>
+                                <button (click)="SubmitComments(item.id)" class="btn btn-raised btn-primary">Submit</button>
+                          
+                              </div>
+                            </div>
+                              </mat-expansion-panel>
+                           
+                            </mat-accordion>
+                         
+                          
+                        
+                          </form>
+                           
+                          </div>
+                        </div>
+                      }
+                       
+
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+                </mat-tab>
+              </mat-tab-group>
+
+            </div>
+          </div>
+          <div class="col-lg-4 col-12">
+            @if(selectedTabIndex == 2){
+            <div class="card card-primary animated fadeInUp animation-delay-7">
+              <div class="card-header">
+                <h3 class="card-title"><i class="mr-1 zmdi zmdi-filter-list zmdi-hc-fw"></i>Filter</h3>
+              </div>
+              <div class="card-body">
+                <div class="mb-2">
+                  <button (click)="askQuestion()" class="btn btn-raised btn-primary"> Ask Question</button>
+                </div>
+                <mat-form-field>
+                  <mat-label>Sort By</mat-label>
+                  <mat-select (selectionChange)="sortDoubtQuestion($event)">
+                    <mat-option value="1">Latest</mat-option>
+                    <mat-option value="2">Oldest</mat-option>
+                    <mat-option value="3">Popular</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <div class="mb-2">
+                  <ul class="list-group">
+                    <li class="list-group-item" (click)="getFilterData(1)">All <span class="ms-auto badge-pill">{{objAllDoubtQuestion?.length}}</span></li>
+                    <li class="list-group-item" (click)="getFilterData(2)">Your Question <span class="ms-auto badge-pill bg-royal">{{filterAllDoubtQuestion?.length}}</span></li>
+                    <li class="list-group-item" (click)="getFilterData(3)">Your Answers</li>
+                    <li class="list-group-item" (click)="getFilterData(4)">Answered </li>
+                    <li class="list-group-item" (click)="getFilterData(5)">Unanswered </li>
+                    
+                </ul>
+                </div>
+                <mat-form-field>
+                  <mat-label>Filter By Topic</mat-label>
+                  <mat-select (selectionChange)="filterByTopic($event)">
+                    @for (item of objVideoList; track item.id) {
+                    <mat-option [value]="item.id">{{item.topicName}}</mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+        
+              </div>
+            </div>
+          }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

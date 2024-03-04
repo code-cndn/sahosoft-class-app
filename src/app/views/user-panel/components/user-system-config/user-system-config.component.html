@@ -1,0 +1,269 @@
+@if ((videoData || videoData == null)) {
+<mat-stepper orientation="vertical" [linear]="true" #stepper>
+  <mat-step [stepControl]="firstFormGroup" [completed]="stepCompleted(0)" [editable]="false">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Upload your system configration details </ng-template>
+      <div class="row">
+        <div class="col-xs-12">
+          @if(videoData?.sysConfigStatusId == 4){
+          <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"><i
+                class="zmdi zmdi-close"></i></button>
+            <strong><i class="zmdi zmdi-close-circle"></i> Rejected!</strong>
+            {{videoData?.sysConfigStatusRemarks}}
+          </div>
+          }
+          <div class="card">
+            <div class="row">
+              <div class="col-lg-6 ">
+                <p class="fs-3 text-primary">How to Access properties windows</p>
+                <img src="assets/img/system-details.gif" alt="" class="img-fluid">
+              </div>
+              <div class="col-lg-6">
+                <div class="card-body overflow-hidden ">
+                  <h4 class="color-royal fw-bold">Please upload a valid screenshot of your computer property window.
+                  </h4>
+                  <p><span class="fw-bold">Step 1:</span> Right-click This PC, and select Properties from the menu. </p>
+                  <p><span class="fw-bold">Step 2:</span> Take screenshot and upload. </p>
+                  <div class="text-center">
+                    <label for="upload" class="btn btn-raised btn-royal btn-raised">
+                      <i class="mr-2 fa fa-upload"></i> <span class="me-3">Upload</span>
+
+                      <input id="upload" type="file" #screenshot (change)="screenShotUpload(screenshot.files)"
+                        formControlName="SystemScreenshotPath" />
+                    </label>
+                    @if(videoData?.systemScreenshotPath != ''){
+                    @if (loader) {
+                    <div class="mt-3">
+                      <app-loader />
+                      <p class="mt-5 fw-bold fs-4 text-center">Plase wait..</p>
+                    </div>
+                    }@else {
+                      @if (screenshotPathSelected) {
+                        <button (click)="SaveScreenshot()" class="btn btn-raised btn-success" >Next</button>
+                      }
+                    }
+                    }
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" [completed]="stepCompleted(1)" [editable]="false">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Demo video play testing</ng-template>
+      @if(videoData?.sysConfigStatusId == 2){
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <strong><i class="zmdi zmdi-check"></i> Success!</strong> we will respond within 24 hours.
+      </div>
+      }@else if(videoData?.sysConfigStatusId == 3){
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="card">
+            <div class="row">
+              <div class="col-lg-12 px-5">
+                @if((videoData?.isDemoPlay != 1 || !stepCompleted(1)) || videoData?.isReIssue == 1){
+                <!-- <video  [src]="'https://videostream2.onrender.com/'+'stream/'+vidParams?.token+'/1'" class="video-js vjs-custom-theme " data-setup="{}" autoplay muted loop controls>
+                  </video> -->
+                <!-- <video  [src]="'http://localhost:3001/'+'stream/'+vidParams?.token+'/1'" class="video-js vjs-custom-theme " data-setup="{}" autoplay muted loop controls>
+                  </video> -->
+                <!-- <video  src="assets/videos/mikethefrog.mp4" data-setup="{}" autoplay muted loop controls>
+                  </video> -->
+
+                @defer (when vidParams) {
+                <app-video-player [vidData]="vidParams" />
+                }@placeholder {
+                <div class="m-5 text-center">
+                  <div class="p-5 ">
+                    <app-loader />
+
+                  </div>
+                  <p class=" pt-5 fw-bold fs-3 animate__animated animate__fadeIn animate__infinite	infinite">Please
+                    Wait....</p>
+                </div>
+
+                }
+
+
+                }
+
+
+              </div>
+              @if (_common.isVideoPlayed()) {
+              <div class="col-lg-12">
+                <div class="card-body overflow-hidden ">
+                  <div class="alert alert-warning alert-light alert-dismissible" role="alert">
+                    <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <strong><i class="zmdi zmdi-alert-triangle"></i> This is demo video on your screen. Please accept if
+                      video is playing well!</strong>
+                    <p><span>*</span> If video not playing try to refresh the page once. </p>
+                  </div>
+
+                 
+                  <!-- <mat-checkbox class="example-margin" formControlName="secondCtrl" required><span
+                      class="text-dark">Demo video played.</span></mat-checkbox>
+                  <mat-checkbox class="example-margin" formControlName="secondCtrl" required><span
+                      class="text-dark">Demo video not played.</span></mat-checkbox> -->
+                      @if (loader) {
+                        <div class="mt-3">
+                          <app-loader />
+                          <p class="mt-5 fw-bold fs-4 text-center">Plase wait..</p>
+                        </div>
+                        }@else {
+                          <!-- <form action="">
+                            <mat-form-field>
+                              <mat-checkbox class="example-margin" (change)="toggleCheckBox()" [disabled]="isShowCheckBox">Check me!</mat-checkbox>
+                            </mat-form-field>
+                            <mat-form-field>
+                              <mat-checkbox class="example-margin" (change)="toggleCheckBox()" [disabled]="!isShowCheckBox">Disabled</mat-checkbox>
+                            </mat-form-field>
+                          </form> -->
+                          
+                          <mat-radio-group formControlName="isDemoPlay" aria-label="Select an option" required>
+                            <mat-radio-button class="text-dark"  value="1">Yes</mat-radio-button>
+                            <mat-radio-button class="text-dark"  value="0">No</mat-radio-button>
+                          </mat-radio-group>
+                          <!-- <mat-checkbox formControlName="yesCheckbox" ><span class="text-dark">Yes</span></mat-checkbox>
+                          <mat-checkbox formControlName="noCheckbox"><span class="text-dark">No</span></mat-checkbox> -->
+                          <button class="btn btn-raised btn-royal btn-raised mx-3" (click)="demoVideoPlayed()" >Next</button>
+                        }
+                 
+
+                </div>
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+
+      </div>
+      }
+
+
+    </form>
+  </mat-step>
+  <mat-step  [editable]="false">
+    <ng-template matStepLabel>Terms and Conditions</ng-template>
+    
+    @if(videoData?.deviceId == null || videoData?.deviceId == 0){
+    <div class="container">
+
+      <div class="terms">
+
+        <!-- Header -->
+        <div class="terms__header">
+          <div class="row">
+            <div class="col-xs-12">
+              <h3 class="text-center">Terms & Conditions</h3>
+            </div>
+          </div>
+        </div>
+        <!-- / -->
+
+        <!-- Alert -->
+        <div class="terms__alert">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="alert alert-info terms__alert" role="alert">
+                <!-- <div>The terms & conditions have been updated to include:</div> -->
+                <ul>
+                  <li>Videos of the class will be played on only one system, and their
+                    validity will be 1 year.</li>
+                </ul>
+                <div>Validity of Class materials :</div>
+                <ul>
+                  <li>Code - Life time</li>
+                  <li>Notes - Life time</li>
+                  <li>Videos - One year (one laptop or desktop only).</li>
+                </ul>
+                <div class="text-center">
+                  Feel free to call us : <span class="fw-bold">+91 - 8588805737</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- / -->
+
+        <!-- Content -->
+        <div class="terms__content">
+
+          <!-- Tab Panels -->
+          <div class="terms__content--tabs">
+            <div class="row">
+
+              <div class="col-xs-12">
+
+                <!-- Tabs -->
+                <div>
+
+                 
+
+                </div>
+                <!-- / -->
+
+              </div>
+
+            </div>
+          </div>
+          <!-- / -->
+
+          <!-- Agreement -->
+          <!-- <div class="terms__content--agreement">
+            <div class="row">
+              <div class="col-xs-12">
+                <mat-checkbox class="example-margin"><span class="text-dark">I agree to the terms &
+                    conditions</span></mat-checkbox>
+
+              </div>
+            </div>
+          </div> -->
+          <!-- / -->
+
+
+
+        </div>
+        <!-- / -->
+
+      </div>
+
+    </div>
+    <div>
+      
+      @if (loader) {
+        <div class="mt-3">
+          <app-loader />
+          <p class="mt-5 fw-bold fs-4 text-center text-center">Plase wait..</p>
+        </div>
+        }@else {
+          <button class="btn btn-raised btn-royal btn-raised" mat-button matStepperPrevious>Back</button>
+          <button class="btn btn-raised btn-royal btn-raised" mat-button (click)="SaveData()">Accept & Continue</button>
+        }
+    
+      <!-- <button mat-button (click)="stepper.reset()">Next</button> -->
+    </div>
+    }@else {
+    <div class="alert alert-success alert-dismissible" role="alert">
+      <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"><i
+          class="zmdi zmdi-close"></i></button>
+      <strong><i class="zmdi zmdi-check"></i> Your configuration details has been saved!</strong> Thanks for co-operation, we sortly
+      approved.
+
+    </div>
+
+    }
+
+
+  </mat-step>
+
+</mat-stepper>
+}

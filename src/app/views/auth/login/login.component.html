@@ -1,0 +1,270 @@
+<!-- [ngClass]="{'show':data.isOpen}" -->
+<!-- [ngStyle]="{'display':data.isOpen?'block':'none'}" -->
+<div class="modal modal-primary show" style="display: block;" id="ms-account-modal" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel">
+    <div class="modal-dialog animated zoomIn animated-3x mt-0" role="document">
+        <div class="modal-content">
+            <div class="modal-header d-block shadow-2dp no-pb">
+                <!-- <button type="button" class="close d-inline pull-right mt-2"  [mat-dialog-close]="true" 
+                    aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                <div class="modal-title text-center">
+                    <span class="ms-logo ms-logo-white ms-logo-sm mr-1">M</span>
+                    <h3 class="no-m ms-site-title">Material<span>Style</span></h3>
+                </div> -->
+                <div class="modal-header-tabs">
+                    <ul class="nav nav-tabs nav-tabs-full nav-tabs-3 nav-tabs-primary" role="tablist">
+                        <li class="nav-item" role="presentation"><a href="#ms-login-tab" aria-controls="ms-login-tab"
+                                role="tab" data-bs-toggle="tab" class="nav-link active withoutripple"><i
+                                    class="zmdi zmdi-account"></i> Login</a>
+                        </li>
+                        <!-- <li class="nav-item" role="presentation"><a href="#ms-register-tab"
+                                aria-controls="ms-register-tab" role="tab" data-bs-toggle="tab"
+                                class="nav-link withoutripple"><i class="zmdi zmdi-account-add"></i> Register</a>
+                        </li> -->
+                        <li class="nav-item" role="presentation"><a href="#ms-recovery-tab"
+                                aria-controls="ms-recovery-tab" role="tab" data-bs-toggle="tab"
+                                class="nav-link withoutripple"><i class="zmdi zmdi-key"></i> Forget Password</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content">
+                    <!-- Start Login tab -->
+                    <div role="tabpanel" class="tab-pane fade active show" id="ms-login-tab">
+                        <form [formGroup]="loginForm" (ngSubmit)="login()" autocomplete="off">
+                            <fieldset>
+                                <mat-form-field style="display: block;">
+                                    <mat-icon matPrefix> email</mat-icon>
+                                    <mat-label>EmailId</mat-label>
+                                    <input  matInput placeholder="Enter your emailid"
+                                    formControlName="userName"  autocomplete="off" required>
+                                </mat-form-field>
+                                <mat-form-field style="display: block;">
+                                    <mat-icon matPrefix> lock</mat-icon>
+                                    <mat-label>Password</mat-label>
+                                    <input type="password"  autocomplete="off"  matInput placeholder="Enter your emailid"
+                                    formControlName="password" required>
+                                </mat-form-field>
+                                <!-- <div class="form-group label-floating">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                        <label class="control-label" for="ms-form-user">EmailId</label>
+                                        <input type="text" id="ms-form-user" class="form-control"
+                                            formControlName="userName"  autocomplete="nope">
+                                    </div>
+                                </div> -->
+
+                                <!-- <div class="form-group label-floating">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-lock"></i></span>
+                                        <label class="control-label" for="ms-form-pass">Password</label>
+                                        <input type="password" id="ms-form-pass" class="form-control"
+                                            formControlName="password" autocomplete="nope">
+                                    </div>
+                                </div> -->
+
+                                <div class="row mt-2">
+                                    <div class="col-md-12">
+                                        <div class="form-group no-mt">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox"> Remember Me
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button type="submit"
+                                            class="btn btn-raised btn-primary pull-left">Login</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+
+                        <!-- <div class="text-center">
+                            <h3>Find Us</h3>
+                       
+                            <a href="https://www.facebook.com/people/Sahosoft-Solutions/100066746649321/" class="wave-effect-light btn btn-raised btn-facebook"><i
+                                    class="zmdi zmdi-facebook"></i> Facebook</a>
+                            <a href="javascript:void(0)" class="wave-effect-light btn btn-raised btn-twitter"><i
+                                    class="zmdi zmdi-twitter"></i> Twitter</a>
+                                    <a href="javascript:void(0)" class="wave-effect-light btn btn-raised btn-google">SahosoftTech</a>
+                            
+                        </div> -->
+                    </div>
+                    <!-- End Login tab -->
+
+
+                    <!-- Start Registration Tab -->
+                    <!-- <div role="tabpanel" class="tab-pane fade" id="ms-register-tab">
+                        <form>
+                            <fieldset>
+                                <div class="form-group label-floating">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                        <label class="control-label" for="ms-form-user-r">Username</label>
+                                        <input type="text" id="ms-form-user-r" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group label-floating">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+                                        <label class="control-label" for="ms-form-email-r">Email</label>
+                                        <input type="email" id="ms-form-email-r" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group label-floating">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-lock"></i></span>
+                                        <label class="control-label" for="ms-form-pass-r">Password</label>
+                                        <input type="password" id="ms-form-pass-r" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group label-floating">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-lock"></i></span>
+                                        <label class="control-label" for="ms-form-pass-rn">Re-type Password</label>
+                                        <input type="password" id="ms-form-pass-rn" class="form-control">
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-raised btn-block btn-primary">Register Now</button>
+                            </fieldset>
+                        </form>
+                    </div> -->
+                    <!-- End Registration Tab -->
+
+
+
+                    <!-- Forget Passord -->
+                    <div role="tabpanel" class="tab-pane fade" id="ms-recovery-tab">
+
+                        <mat-stepper [linear]="true" #stepper >
+                            <mat-step [editable]="stepper.selectedIndex == 1"   [stepControl]="firstFormGroup" [ngClass]="{'hide-step-label': true}">
+
+                                <form [formGroup]="firstFormGroup">
+                                    <!-- <ng-template matStepLabel>Step 1</ng-template> -->
+                                    @if (!switchRecoveryOption) {
+                                    <mat-form-field style="display: block;">
+                                        <mat-icon matPrefix> call</mat-icon>
+                                        <mat-label>Mobile Number</mat-label>
+
+                                        <input #mobile matInput placeholder="Enter your registered mobile no."
+                                            formControlName="firstCtrl" required>
+
+                                    </mat-form-field>
+                                    <div>
+                                        <button (click)="getotp(mobile.value,1)" type="button"
+                                            class="btn btn-raised btn-block btn-primary pull-center"
+                                            >Submit</button>
+                                    </div>
+                                    <div class="text-center mt-2">
+                                        <p>Or</p>
+                                        <a (click)="switchRecoveryOption=true">RECOVER BY USING EMAIL-ID</a>
+                                    </div>
+                                    }@else {
+                                    <mat-form-field style="display: block;">
+                                        <mat-icon matPrefix> email</mat-icon>
+                                        <mat-label>EmailId</mat-label>
+                                        <input #mobile matInput placeholder="Enter your emailid"
+                                            formControlName="firstCtrl" required>
+
+                                    </mat-form-field>
+                                    <div>
+                                        @if (!hideDiv) {
+                                            <button (click)="getotp(mobile.value,2)" type="button"
+                                            class="btn btn-raised btn-block btn-primary pull-center"
+                                            >Submit</button>
+                                        }
+                                        @if (hideDiv) {
+                                            <button  type="button"
+                                            class="btn btn-raised btn-block btn-primary pull-center"
+                                            >Please wait...</button>
+                                        }
+                                        
+                                    </div>
+                                    <div class="text-center mt-2">
+                                        <p>Or</p>
+                                        <a (click)="switchRecoveryOption=false">RECOVER BY USING MOBILE NUMBER</a>
+                                    </div>
+
+                                    }
+                                </form>
+
+
+                            </mat-step>
+                            <mat-step [editable]="false" [stepControl]="secondFormGroup" [ngClass]="{'hide-step-label': true}">
+                                <form [formGroup]="secondFormGroup">
+                                    <div class="text-center">
+                                        <p class="mb-0">OTP</p>
+                                        <p>Verification Code</p>
+                                        <p class="text-muted">We have sent a verification code to your mobile number</p>
+                                    </div>
+                                    <mat-form-field class="d-block">
+                                        <!-- <mat-label>Enter 4 digit OTP</mat-label> -->
+                                        <input #otp matInput formControlName="secondCtrl"
+                                            placeholder="Please enter OTP to verify" required>
+                                    </mat-form-field>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="text-center">
+                                            <div>
+                                                <button type="button" class="btn btn-raised  btn-primary"
+                                                (click)="validateOtp(otp.value)">Verify OTP</button>
+                                            </div>
+                                            <div>
+                                                <button type="button" class="btn btn-raised  btn-primary" mat-button matStepperPrevious>Back</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                               
+                                </form>
+                            </mat-step>
+                            <mat-step [editable]="false" [ngClass]="{'hide-step-label': true}">
+                                <!-- <ng-template matStepLabel>Step 3</ng-template> -->
+                                <form [formGroup]="changePass" autocomplete="off">
+                                <mat-form-field style="display: block;">
+                                    <mat-label>Enter your password</mat-label>
+                                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" autocomplete="false"
+                                    [ngClass]="{'is-invalid ' :(submitted || f['password'].touched) && f['password'].errors, 'is-valid':!(f['password'].errors)}">
+                                   
+                                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
+                                    @if (f['password'].errors && submitted) {
+                                        <div class="text-danger p-2">{{formErrors.password}}</div>
+                                    }
+                                    
+                                  </mat-form-field>
+                                 
+                                  <mat-form-field style="display: block;">
+                                    <mat-label>Enter your password</mat-label>
+                                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" autocomplete="false"
+                                    [ngClass]="{'is-invalid ' :(submitted || f['confirmPassword'].touched) && f['confirmPassword'].errors, 'is-valid':!(f['confirmPassword'].errors)}">
+                                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
+                                    <!-- @if (changePass.invalid) {
+                                        <mat-error>{{getErrorMessage()}}</mat-error>
+                                      } -->
+                                      <div class="text-danger p-2" >{{f['confirmPassword'].errors && f['confirmPassword'].touched? 'Password & confirm password must be same':'' }}</div>
+                                  </mat-form-field>
+                       
+                                <div>
+                                    <div>
+                                        <button type="button" class="btn btn-raised  btn-primary"
+                                        (click)="changePassword()" [disabled]="f['confirmPassword'].errors">Change Password</button>
+                                    </div>
+                                </div>
+                            </form>
+                            </mat-step>
+                        </mat-stepper>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
