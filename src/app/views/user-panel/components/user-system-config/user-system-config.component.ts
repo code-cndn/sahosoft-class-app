@@ -229,9 +229,11 @@ export class UserSystemConfigComponent implements OnInit {
       deviceId: this.devicedID,
       deviceIdDate: datestr
     }
-
+    console.log(obj);
     this._http.postImage(environment.BASE_API_PATH_MYCLASS + "MyClass_PlayOnlinePaidVideo/UpdateOnlinePaidVideoSysConfig/", obj).subscribe(res => {
       if (res.isSuccess) {
+        console.log(res.isSuccess);
+        
         this.loader = false;
         this.getPlayOnlinePaidVideoData();
         this.completedSteps[2] = true
