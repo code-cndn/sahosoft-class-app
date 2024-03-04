@@ -78,7 +78,7 @@ jobs:
         # NOTE: enterprise developers may hard code a version
         with:
           node-version: 'lts/*'
-          cache: yarn
+          cache: npm
           # node-version-file: '.nvmrc'
 
       - name: Setup Rust
