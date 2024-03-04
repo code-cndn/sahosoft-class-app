@@ -90,9 +90,9 @@
       },
       "externalBin": [],
       "icon": [
-        "icons/s32x32.png",
-        "icons/s128x128.png",
-        "icons/s128x128@2x.png",
+        "icons/color.png",
+        "icons/color.png",
+        "icons/color.png",
         "icons/sfavicon.icns",
         "icons/s128x128_2x.ico"
       ],
