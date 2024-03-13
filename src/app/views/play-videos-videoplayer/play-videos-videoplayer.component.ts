@@ -26,7 +26,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AskQuestionModelComponent } from './ask-question-model/ask-question-model.component';
 import { CryptoService } from '../../shared/crypto.service';
 import { TextTruncatePipe } from '../../shared/pipes/text-truncate.pipe';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-play-videos-videoplayer',
@@ -152,7 +152,12 @@ export class PlayVideosVideoplayerComponent implements OnInit {
   }
   downloadNotes() {
     let d = this.objVideoList.find(x => x.id == this.chapterId);
-    window.open(d.resoursePath, "_blank");
+    let notesPath = d.resoursePath.toLowerCase();
+
+    if (notesPath != 'n/a')
+      window.open(d.resoursePath, "_blank");
+    else
+      alert('Notes not available for the chapter.');
 
 
   }
@@ -184,7 +189,7 @@ export class PlayVideosVideoplayerComponent implements OnInit {
     this._http.post(environment.BASE_API_PATH + 'Stream_videoPlayInfo/Save', obj)
       .subscribe(res => {
         console.log(res);
-        
+
         if (res.isSuccess) {
           let obj2 = {
             token: res.data.token,

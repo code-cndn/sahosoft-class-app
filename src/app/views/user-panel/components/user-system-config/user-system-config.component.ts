@@ -273,32 +273,45 @@ export class UserSystemConfigComponent implements OnInit {
   videoData: any;
   selectedIndex: any;
   getPlayOnlinePaidVideoData() {
+
     this._http.post(environment.BASE_API_PATH_MYCLASS + "MyClass_PlayOnlinePaidVideo/PlayOnlinePaidVideo_GetByUserId", { userId: this.userDetails.userId }).subscribe(res => {
       if (res.isSuccess) {
-        let resData = res.data.find(x => (x.courseId == this.data.itemId && x.batchId == this.data.batchId) && x.isReIssue == 0);
-        if ((resData.sysConfigStatusId == 2 || resData.sysConfigStatusId == 3)) {
-          this.completedSteps[0] = true
-          this.goToStep(1);
-          this.selectetdVideo();
-          // if(resData.isReIssue)
-          if (resData.isDemoPlay == 1 && resData.isReIssue == 0) {
-            this.completedSteps[1] = true
-            this.goToStep(2);
+        console.log(res);
+        console.log(this.data);
 
-
-          } else if (resData.isReIssue == 1) {
-
-          }
-
+        if(res.data.length !=0){
+          let resData = res.data.find(x => (x.courseId == this.data.itemId && x.batchId == this.data.batchId) && x.isReIssue == 0);
+            if(resData){
+              
+              console.log(resData);
+              
+              if ((resData.sysConfigStatusId == 2 || resData.sysConfigStatusId == 3)) {
+                this.completedSteps[0] = true
+                this.goToStep(1);
+                this.selectetdVideo();
+                // if(resData.isReIssue)
+                if (resData.isDemoPlay == 1 && resData.isReIssue == 0) {
+                  this.completedSteps[1] = true
+                  this.goToStep(2);
+      
+      
+                } else if (resData.isReIssue == 1) {
+      
+                }
+      
+              }
+              this.videoData = resData;
+            }
         }
-        this.videoData = resData;
+        
+        
+      
 
       }
     });
   }
   vidParams: any
   selectetdVideo() {
-    debugger
     let obj = {
       userId: this.userDetails.userId,
       date: new Date(),
