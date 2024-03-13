@@ -67,6 +67,8 @@ export class VideoPlayerComponent implements OnInit, OnChanges, OnDestroy, After
   loader: HTMLVideoElement;
   
   ngOnChanges(changes: SimpleChanges): void {
+
+    console.log(this.vidData);
     
     // $.getScript('assets/js/script.js');
 
@@ -79,12 +81,13 @@ export class VideoPlayerComponent implements OnInit, OnChanges, OnDestroy, After
       this.loader.style.display = "block";
     }
     
- 
+    console.log(this.vidData);
     if (changes['vidData'].currentValue && this.vidData) {
       this.video = this.vidData;
 
       if(this.video.streamTypeId == StreamType.DownloadFirst){
-        this._http.getVideo(environment.BASE_STREAMVIDEO_PATH + this.video.token + '/' + this.video.videoId).subscribe(
+        // this._http.getVideo(environment.BASE_STREAMVIDEO_PATH + this.video.token + '/' + this.video.videoId).subscribe(
+          this._http.getVideo(environment.BASE_API_PATH + "Stream_videoPlayInfo/stream/"+ this.video.token + '/' + this.video.videoId).subscribe(
           (blob: Blob) => {
             this._common.isVideoPlayed.set(true);
             const videoUrl = URL.createObjectURL(blob);
@@ -100,7 +103,7 @@ export class VideoPlayerComponent implements OnInit, OnChanges, OnDestroy, After
       }
       else if(this.video.streamTypeId == StreamType.StreamFirst){
         const vi = document.getElementById('customVideoPlayer');
-        this.videoUrl = environment.BASE_STREAMVIDEO_PATH + this.video.token + '/' + this.video.videoId;
+        this.videoUrl = environment.BASE_API_PATH+ "Stream_videoPlayInfo/stream/"+ this.video.token + '/' + this.video.videoId;
         this.renderer.setAttribute(vi, 'src', this.videoUrl);
       }
    

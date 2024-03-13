@@ -298,18 +298,21 @@ export class UserSystemConfigComponent implements OnInit {
   }
   vidParams: any
   selectetdVideo() {
+    debugger
     let obj = {
       userId: this.userDetails.userId,
       date: new Date(),
       videoId: 10001,
       isPlay: 0,
     }
-
-    this._http.post(environment.BASE_VIDEO_API_PATH + 'VideoPlayerInfo/Save', obj)
+    // Stream_videoPlayInfo
+    // this._http.post(environment.BASE_VIDEO_API_PATH + 'VideoPlayerInfo/Save', obj)
+    this._http.post(environment.BASE_API_PATH + 'Stream_videoPlayInfo/Save', obj)
       .subscribe(res => {
-        if (res.sucess) {
+        if (res.isSuccess) {
+          
           let obj2 = {
-            token: res.token,
+            token: res.data.token,
             videoId: obj.videoId,
             streamTypeId: 2
           }

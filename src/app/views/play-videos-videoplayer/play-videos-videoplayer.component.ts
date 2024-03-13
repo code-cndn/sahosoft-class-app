@@ -180,11 +180,14 @@ export class PlayVideosVideoplayerComponent implements OnInit {
       isPlay: 0,
     }
 
-    this._http.post(environment.BASE_VIDEO_API_PATH + 'VideoPlayerInfo/Save', obj)
+    // this._http.post(environment.BASE_VIDEO_API_PATH + 'VideoPlayerInfo/Save', obj)
+    this._http.post(environment.BASE_API_PATH + 'Stream_videoPlayInfo/Save', obj)
       .subscribe(res => {
-        if (res.sucess) {
+        console.log(res);
+        
+        if (res.isSuccess) {
           let obj2 = {
-            token: res.token,
+            token: res.data.token,
             videoId: obj.videoId,
             streamTypeId: this.courseData.streamTypeId
           }

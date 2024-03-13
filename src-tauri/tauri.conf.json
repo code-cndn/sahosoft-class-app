@@ -20,6 +20,7 @@
       "active": true,
       "category": "DeveloperTool",
       "copyright": "",
+      
       "deb": {
         "depends": []
       },
@@ -59,11 +60,9 @@
       {
         "height": 600,
         "title": "Sahosoft Class",
-        "minWidth": 1000,
-        "minHeight": 600,
+        "width": 1000,
         "resizable": true,
         "fullscreen": false,
-        "visible": false,
         "decorations": true,
         "alwaysOnTop": false
       }
