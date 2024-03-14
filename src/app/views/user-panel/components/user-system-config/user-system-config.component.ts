@@ -229,10 +229,8 @@ export class UserSystemConfigComponent implements OnInit {
       deviceId: this.devicedID,
       deviceIdDate: datestr
     }
-    console.log(obj);
     this._http.postImage(environment.BASE_API_PATH_MYCLASS + "MyClass_PlayOnlinePaidVideo/UpdateOnlinePaidVideoSysConfig/", obj).subscribe(res => {
       if (res.isSuccess) {
-        console.log(res.isSuccess);
         
         this.loader = false;
         this.getPlayOnlinePaidVideoData();
@@ -276,15 +274,9 @@ export class UserSystemConfigComponent implements OnInit {
 
     this._http.post(environment.BASE_API_PATH_MYCLASS + "MyClass_PlayOnlinePaidVideo/PlayOnlinePaidVideo_GetByUserId", { userId: this.userDetails.userId }).subscribe(res => {
       if (res.isSuccess) {
-        console.log(res);
-        console.log(this.data);
-
         if(res.data.length !=0){
           let resData = res.data.find(x => (x.courseId == this.data.itemId && x.batchId == this.data.batchId) && x.isReIssue == 0);
             if(resData){
-              
-              console.log(resData);
-              
               if ((resData.sysConfigStatusId == 2 || resData.sysConfigStatusId == 3)) {
                 this.completedSteps[0] = true
                 this.goToStep(1);

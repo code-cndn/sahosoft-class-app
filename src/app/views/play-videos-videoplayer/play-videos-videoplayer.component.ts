@@ -188,7 +188,6 @@ export class PlayVideosVideoplayerComponent implements OnInit {
     // this._http.post(environment.BASE_VIDEO_API_PATH + 'VideoPlayerInfo/Save', obj)
     this._http.post(environment.BASE_API_PATH + 'Stream_videoPlayInfo/Save', obj)
       .subscribe(res => {
-        console.log(res);
 
         if (res.isSuccess) {
           let obj2 = {

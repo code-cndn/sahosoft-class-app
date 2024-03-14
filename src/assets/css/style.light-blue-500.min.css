@@ -4948,7 +4948,7 @@ hr.double {
 }
 
 .ms-header {
-  min-height: 100px;
+  /* min-height: 100px; */
   background-color: #fff;
   position: relative;
   z-index: 2;

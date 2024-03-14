@@ -181,7 +181,7 @@ export class LoginComponent implements OnInit {
 
           } else {
             LoaderService.hideLoader();
-            this._toastr.error(res.errors[0], "Login")
+            this._toastr.error(res.errors, "Login")
           }
         });
       }

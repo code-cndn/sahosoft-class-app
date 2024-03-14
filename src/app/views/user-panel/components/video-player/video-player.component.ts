@@ -68,8 +68,6 @@ export class VideoPlayerComponent implements OnInit, OnChanges, OnDestroy, After
   
   ngOnChanges(changes: SimpleChanges): void {
 
-    console.log(this.vidData);
-    
     // $.getScript('assets/js/script.js');
 
     // const video_players = document.querySelectorAll(".video_player");
@@ -81,7 +79,6 @@ export class VideoPlayerComponent implements OnInit, OnChanges, OnDestroy, After
       this.loader.style.display = "block";
     }
     
-    console.log(this.vidData);
     if (changes['vidData'].currentValue && this.vidData) {
       this.video = this.vidData;
 
@@ -196,7 +193,7 @@ this.players.forEach((video_player) => {
           <i class="material-icons auto-play"></i>
         </span>
 
-        <span class="icon">
+        <span class="icon d-none">
           <i class="material-icons captionsBtn">closed_caption</i>
         </span>
 
